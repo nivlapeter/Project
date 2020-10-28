@@ -33,3 +33,29 @@ def edit_profile(request):
     else:
         form=ProfileForm()
     return render(request, 'edit_profile.html', {"form":form,"profile",profile})
+
+@login_required(login_url='/accounts/login/')
+def project(request, project_id):
+    current_user = request.user
+    profile = Profile.objects.get(user=current_user)
+    message=f'{"Gratitude for your participation"}'
+    project = Project.objects.filter(project_id=id)
+    ratings = Ratings.objects.filter(project=project)
+    design = ratings.aggregate(Avg('design'))['design__avg']
+    usability = ratings.aggregate(Avg('usability'))['usability__avg']
+    creativity = ratings.aggregate(Avg('creativity'))['creativity__avg']
+    content = ratings.aggregate(Avg('content'))['content__avg']
+    score = ratings.aggregate(Avg('score'))['score__avg']
+
+    if request.method == 'POST':
+        form = RatingsForm(request.POST)
+        if form.is_valid():
+            ratings = form.save(commit=False)
+            ratings.score = (ratings.design + ratings.usability + ratings.creativity + ratings.content) / 3
+            ratings.project = project
+            ratings.user = user
+            ratings.save
+        return redirect('project', project_id)
+    else:
+        form = RatingsForm()
+        return render(request,'project.html',{"project":project,"ratings":ratings,"form":form,"design":design,"usability":usability,"creativity":creativity,"content":content,"score":score} )
