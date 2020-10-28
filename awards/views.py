@@ -71,13 +71,13 @@ def upload_project(request):
             project = form.save(commit=False)
             project.user = current_user
             project.save()
-        # take a look later(email)
-        # if form.is_valid(): 
-        #     name = form.cleaned_data['your_name']
-        #     email = form.cleaned_data['email']
-        #     recipient = UploadFormRecipients(name = name,email =email)
-        #     recipient.save()
-        #     send_welcome_email(name,email)        
+        #take a look later(email)
+        elif form.is_valid(): 
+            name = form.cleaned_data['your_name']
+            email = form.cleaned_data['email']
+            recipient = UploadFormRecipients(name = name,email =email)
+            recipient.save()
+            send_welcome_email(name,email)        
         return redirect('index')
     else:
         form = UploadForm()
