@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Project,Profile,Ratings,Categories
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .email import send_welcome_email
+from .emails import send_welcome_email
 
 # Create your views here.
 
@@ -18,7 +18,7 @@ def profile(request):
     current_user = request.user
     profile = Profile.objects.get(user=current_user)
     projects = Project.objects.filter(user=current_user)
-    my_profile= = Profile.objects.get(user=current_user)
+    my_profile = Profile.objects.get(user=current_user)
     return render(request, 'profile.html', locals())
 
 @login_required(login_url='/accounts/login/')
@@ -33,7 +33,7 @@ def edit_profile(request):
         return redirect('myprofile')
     else:
         form=ProfileForm()
-    return render(request, 'edit_profile.html', {"form":form,"profile",profile})
+    return render(request, 'edit_profile.html', {"form":form,"profile":profile})
 
 @login_required(login_url='/accounts/login/')
 def project(request, project_id):

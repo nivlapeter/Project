@@ -19,4 +19,5 @@ from django.conf.urls import url,include
 urlpatterns = [
     url('admin/', admin.site.urls),
     url('', include('awards.urls')),
+    url('accounts/', include('registration.backends.simple.urls')),
 ]
