@@ -74,3 +74,17 @@ def upload_project(request):
     else:
         form = UploadForm()
         return render(request, 'upload_project.html',{"form":form,"profile":profile})
+
+@login_required(login_url='/accounts/login/')
+def search(request):
+    current_user = request.user
+    profile = Profile.objects.get(user=current_user)
+    if 'project' in request.GET and request.GET["project"]:
+        search_term=request.GET.get("project")
+        searched_project=project.search_project(search_term)
+        message=f"{search_term}"
+
+        return render(request,'search.html',{"message":message,"project":searched_project,"profile":profile})
+    else:
+        message="sorry! you haven't searched for any item"
+        return render(request,'/search.html',{"message":message,"project":searched_project,"profile":profile})
