@@ -21,7 +21,7 @@ urlpatterns = [
     url('myprofile/', views.profile, name = 'myprofile'),
     url('profile/edit/', views.edit_profile, name = 'edit'),
     url('profile/upload', views.upload_project, name = 'upload'),
-    url('project/<project_id>/', views.project, name = 'project'),
+    url(r'^project/(?P<project_id>\w{0,50})', views.project, name = 'project'),
     url('search/', views.search, name='search'),
 
 ]
