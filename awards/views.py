@@ -67,7 +67,7 @@ def upload_project(request):
     profile = Profile.objects.get(user=current_user)
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
-        for form.is_valid():
+        if form.is_valid():
             project = form.save(commit=False)
             project.user = current_user
             project.save()
