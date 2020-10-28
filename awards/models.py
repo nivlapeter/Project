@@ -36,6 +36,17 @@ class Profile(models.Model):
     def __str__(self):
         return self.title
 
+class Ratings(models.Model):
+    design=models.IntegerField(default='')
+    usability=models.IntegerField(default='')
+    content=models.IntegerField(default='')
+    score=models.IntegerField(default='')
+    project=models.ForeignKey(Project, on_delete=models.CASCADE)
+    profile=models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
 
 
 
