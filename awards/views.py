@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Project,Profile,Ratings,Categories
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from .email import send_welcome_email
 
 # Create your views here.
 
@@ -66,10 +67,17 @@ def upload_project(request):
     profile = Profile.objects.get(user=current_user)
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
-        if form.is_valid():
+        for form.is_valid():
             project = form.save(commit=False)
             project.user = current_user
             project.save()
+        # take a look later(email)
+        if form.is_valid(): 
+            name = form.cleaned_data['your_name']
+            email = form.cleaned_data['email']
+            recipient = UploadFormRecipients(name = name,email =email)
+            recipient.save()
+            send_welcome_email(name,email)        
         return redirect('index')
     else:
         form = UploadForm()
@@ -88,3 +96,4 @@ def search(request):
     else:
         message="sorry! you haven't searched for any item"
         return render(request,'/search.html',{"message":message,"project":searched_project,"profile":profile})
+
