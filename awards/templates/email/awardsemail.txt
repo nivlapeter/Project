@@ -1,0 +1,3 @@
+Hello {{name}}
+
+Welcome to the Accolades. You will find the most exciting Project Displays. Enjoy!
