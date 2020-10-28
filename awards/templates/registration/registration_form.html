@@ -1,0 +1,30 @@
+{%extends 'registration/base.html'%} {% load bootsrap4 %} {% block content %}
+<div class="container">
+    <div class="row">
+        <!-- Empty div-->
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            {%if form.errors%}
+            <p>Kindly check the information keyed in and try again!</p>
+            {% endif %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="text-center">Sign Up</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="/accounts/register" method="post">
+                        {% crsf_token %} {% bootstrap_form form %}
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Sign Up">
+                        </div>
+                        <input type="hidden" name="next" value="{{ next }}">
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <!-- empty div-->
+        <div class="col-md-4"></div>
+    </div>
+</div>
+{% endblock content%}
