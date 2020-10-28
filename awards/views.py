@@ -11,3 +11,11 @@ def index(request):
     projects = Project.objects.order_by('pub_date').all()
 
     return render(request,'index.html',{"projects":projects})
+
+@login_required(login_url='/accounts/login/')
+def profile(request):
+    current_user = request.user
+    profile = Profile.objects.get(user=current_user)
+    projects = Project.objects.filter(user=current_user)
+    my_profile= = Profile.objects.get(user=current_user)
+    return render(request, 'profile.html', locals())
