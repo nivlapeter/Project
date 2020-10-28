@@ -59,3 +59,18 @@ def project(request, project_id):
     else:
         form = RatingsForm()
         return render(request,'project.html',{"project":project,"ratings":ratings,"form":form,"design":design,"usability":usability,"creativity":creativity,"content":content,"score":score} )
+
+@login_required(login_url='/accounts/login/')
+def upload_project(request):
+    current_user = request.user
+    profile = Profile.objects.get(user=current_user)
+    if request.method == 'POST':
+        form = UploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.user = current_user
+            project.save()
+        return redirect('index')
+    else:
+        form = UploadForm()
+        return render(request, 'upload_project.html',{"form":form,"profile":profile})
