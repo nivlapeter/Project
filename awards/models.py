@@ -28,6 +28,7 @@ class Project(models.Model):
 
 class Profile(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
+    uname=models.CharField(max_length=100)
     profilepic=CloudinaryField('image',default="")
     bio=models.TextField(max_length=255)
     projects=models.ForeignKey(Project,on_delete=models.CASCADE)
@@ -40,6 +41,7 @@ class Ratings(models.Model):
     design=models.IntegerField(default='')
     usability=models.IntegerField(default='')
     content=models.IntegerField(default='')
+    creativity=models.IntegerField(default='')
     score=models.IntegerField(default='')
     project=models.ForeignKey(Project, on_delete=models.CASCADE)
     profile=models.ForeignKey(Profile, on_delete=models.CASCADE)
