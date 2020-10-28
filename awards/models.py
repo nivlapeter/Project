@@ -9,6 +9,13 @@ from django.contrib.auth.models import User
 # Ratings
 #categories
 
+class Categories(models.Model):
+    Categories=models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.title
+
+
 class Project(models.Model):
     title=models.CharField(max_length=30)
     Image=CloudinaryField('image',default="")
@@ -19,7 +26,7 @@ class Project(models.Model):
     creativity=models.IntegerField(blank=True,default='')
     content=models.IntegerField(blank=True,default='')
     overall=models.IntegerField(blank=True,default='')
-    categories=models.ManyToManyField(categories)
+    categories=models.ManyToManyField(Categories)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     pub_date=models.DateTimeField(default=timezone.now)
 
@@ -49,11 +56,7 @@ class Ratings(models.Model):
     def __str__(self):
         return self.title
 
-class Categories(models.Model):
-    categories=models.CharField(max_length=255)
 
-    def __str__(self):
-        return self.title
 
 
 
