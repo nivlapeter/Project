@@ -160,3 +160,7 @@ STATICFILES_DIRS = [
 ]
 VENV_PATH = os.path.dirname(BASE_DIR)
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+
+LOGIN_REDIRECT_URL = 'index'
+LOGIN_URL = 'login'
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'

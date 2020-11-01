@@ -15,9 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import url,include
+from django.contrib.auth import views as auth_views
+from awards import views
+
 
 urlpatterns = [
     url('admin/', admin.site.urls),
     url('', include('awards.urls')),
+    # url('register',views.registration, name='registration'),
+    # url('login',auth_views.LoginView.as_view(), {"next_page":'/'}),
+    url('logout/', auth_views.LogoutView.as_view(), {"next_page":'/'}),
     url('accounts/', include('registration.backends.simple.urls')),
+    url('accounts/', include('django.contrib.auth.urls'))
 ]

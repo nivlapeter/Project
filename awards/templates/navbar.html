@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-warning mb-3">
+        <div class="container-fluid">
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#menu"><span class="navbar-toggler-icon"></span></button>
+            <a class="nav-link" href="{%url 'index'%}">Awards</a>
+            <a a class="navbar-brand" href="{%url 'index'%}">Home</a>
+            <div class="collapse navbar-collapse" id="menu"></div>
+
+            <!-- Adding a search form -->
+            <div class="col-sm-4 col-md-4 navbar-right">
+                <form class="navbar-form" role="search" action="{% url 'search' %}">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="project">
+                        <hr>
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary btn-sm active" type="submit"><i class="glyphicon glyphicon-search"></i>search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end of search form -->
+
+            <!-- point user to the login route -->
+            {% if user.is_authenticated %}
+            <ul class="navbar-nav ml-auto nav-flex-icons"></ul>
+
+            <a class="nav-item nav-link" href="{%url 'upload'%}">Post</a>
+            <a class="nav-item nav-link" href="{% url 'myprofile/{{user}}}' %">Profile</a>
+            <a class="nav-item nav-link" href="{% url 'edit'%}">Edit Profile</a>
+            <a class="nav-item nav-link" href="/accounts/logout">Sign Out</a>
+            <img src="{{ profile.profilepic.url}}" class="rounded-circle z-depth-0" alt="avatar image" height="35" width="35"> {% else %}
+
+            <a class="btn btn-primary btn-sm active nav-link" href="{%url 'login'%}">Register/Login</a> {% endif %}
+
+
+        </div>
+        </div>
+    </nav>
+
+</body>
+
+</html>

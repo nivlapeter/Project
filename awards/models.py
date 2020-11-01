@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 #categories
 
 class Categories(models.Model):
-    Categories=models.CharField(max_length=255)
+    title=models.CharField(max_length=255)
 
     def __str__(self):
         return self.title
@@ -27,14 +27,14 @@ class Project(models.Model):
     content=models.IntegerField(blank=True,default='')
     overall=models.IntegerField(blank=True,default='')
     categories=models.ManyToManyField(Categories)
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    user=models.OneToOneField(User,on_delete=models.CASCADE)
     pub_date=models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.title
 
 class Profile(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    user=models.OneToOneField(User,on_delete=models.CASCADE)
     uname=models.CharField(max_length=100)
     profilepic=CloudinaryField('image',default="")
     bio=models.TextField(max_length=255)
@@ -42,7 +42,13 @@ class Profile(models.Model):
     contact=models.CharField(max_length=30)
 
     def __str__(self):
-        return self.title
+        return f'{self.uname} Profile'
+
+    
+    @classmethod
+    def search_project(cls, search_term):
+        projects = cls.objects.filter(title__icontains=search_term)
+        return projects
 
 class Ratings(models.Model):
     design=models.IntegerField(default='')

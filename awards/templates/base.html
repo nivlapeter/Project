@@ -1,0 +1,86 @@
+{% load bootstrap4 %} {% load static%} {% load cloudinary %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> {% if title %}
+    <title> Awards {{title}}</title>
+    {% else %}
+    <title> Awards </title>
+    {% endif %} {% block styles %} {% bootstrap_css %}
+    <link rel="shortcut icon" type="image/x-icon" href="https://www.awwwards.com/favicon.ico" />
+    <link rel="stylesheet" href="{% static 'main.css' %}"> {% endblock %}
+
+</head>
+
+<body>
+    {% include 'navbar.html' %} {% block content %} {%endblock%} {% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {{block.super}}
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.3/clipboard.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+        <!--footer-->
+        <footer class="footer">
+            <div class="footer-left">
+                <image src="" alt="">
+                    <p>
+
+                    </p>
+                    <div class="socials">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-dribble"></i></a>
+                        <a href="#"><i class="fa fa-youtube"></i></a>
+                        <a href="#"><i class="fa fa-tumblr"></i></a>
+                    </div>
+            </div>
+            <ul class="footer-right">
+                <li>
+                    <h2>Product</h2>
+                    <ul class="box">
+                        <li><a href="#">Theme Design</a></li>
+                        <li><a href="#">Plugin Design</a></li>
+                        <li><a href="#">Wordpress</a></li>
+                        <li><a href="#">awwwards</a></li>
+                        <li><a href="#">HTML Template</a></li>
+                    </ul>
+                </li>
+                <li class="features">
+                    <h2>useful links</h2>
+                    <ul class="box">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Sales</a></li>
+                        <li><a href="#">Tickets</a></li>
+                        <li><a href="#">Certifications</a></li>
+                        <li><a href="#">Customer Service</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h2>Address</h2>
+                    <ul class="box">
+                        <li><a href="#">111, En'kongu</a></li>
+                        <li><a href="#">DA15 9PS, sidcup</a></li>
+                        <li><a href="#">Kajiado</a></li>
+                        <li><a href="#">Kenya</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="footer-bottom">
+                <p>
+                    All rights reserved by &copy;conceptial2020
+                </p>
+            </div>
+        </footer>
+        {% endblock %}
+</body>
+
+</html>

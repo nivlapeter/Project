@@ -18,10 +18,28 @@ from . import views
 
 urlpatterns = [
     url('', views.index, name = 'index'),
-    url('myprofile/', views.profile, name = 'myprofile'),
+    url('profile/(?P<username>\w{0,50})/', views.profile, name = 'myprofile'),
     url('profile/edit/', views.edit_profile, name = 'edit'),
-    url('profile/upload', views.upload_project, name = 'upload'),
-    url(r'^project/(?P<project_id>\w{0,50})', views.project, name = 'project'),
+    url('upload/', views.project_upload, name = 'upload'),
+    url('project/(\d+)',views.project,name = 'project'),
     url('search/', views.search, name='search'),
+
+    # url(r'^$', views.index, name='index'),
+    # url(r'^project/(\d+)$', views.project, name='project'),
+    # url(r'^upload/$', views.upload_site, name='upload'),
+    # url(r'^profile/(?P<username>\w{0,50})/$', views.profile, name='profile'),
+    # url(r'^update_profile/(\d+)$', views.update_profile, name='update_profile'),
+    # url(r'^search/$', views.search, name='search_results'),
+    # url(r'^api/profiles/$', views.ProfileList.as_view()),
+    # url(r'^api/projects/$', views.ProjectList.as_view())
+
+    # path('',views.home, name='Welcome'),
+    # re_path('authorprofile/(\d+)', views.view_user, name='view_userprofile'),
+    # path('new/project', views.new_project, name='new_project'),
+    # re_path('viewproject/(\d+)', views.view_project, name='view_project'),
+    # path('accounts/profile/', views.profile, name='user_profile'),
+    # re_path('search/', views.search_results, name='search_results'),
+    # path('api/projects/', views.ProjectList.as_view()),
+    # path('api/profiles/', views.ProfileList.as_view()),   
 
 ]

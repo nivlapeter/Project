@@ -1,0 +1,128 @@
+{% extends 'base.html' %} {% load bootstrap4 %} {% load cloudinary %} {% block content %} {{block.super}}
+<!--Carousel Wrapper-->
+<div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+    <!--Indicators-->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-2" data-slide-to="1"></li>
+        <li data-target="#carousel-example-2" data-slide-to="2"></li>
+    </ol>
+    <!--/.Indicators-->
+    <!--Slides-->
+    <div class="carousel-inner" role="listbox">
+        <div class="carousel-item active">
+            <div class="view">
+                <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(68).jpg" alt="First slide">
+                <div class="mask rgba-black-strong"></div>
+            </div>
+            <div class="carousel-caption">
+                <h1 class="page-title">
+                    Project Calibration
+                </h1>
+
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+                <script src="https://www.jqueryscript.net/demo/Animated-Circular-Progress-Bar-with-jQuery-Canvas-Circle-Progress/dist/circle-progress.js"></script>
+                <div class="circles">
+                    <div class="first circle">
+                        <strong></strong>
+                        <span>DESIGN</span>
+                    </div>
+
+                    <div class="second circle">
+                        <strong></strong>
+                        <span>USABILITY</span>
+                    </div>
+
+                    <div class="third circle">
+                        <strong></strong>
+                        <span>CREATIVITY</span>
+                    </div>
+
+                    <div class="forth circle">
+                        <strong></strong>
+                        <span>CONTENT</span>
+                    </div>
+
+                </div>
+
+                <a href="/project/{{top.id}}" class="btn btn-primary">Review</a>
+            </div>
+        </div>
+    </div>
+    <!--/.Slides-->
+    <!--Controls-->
+    <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+
+</div>
+<div class="container-fluid">
+    <br>
+    <div class="row">
+        {% for project in projects %}
+        <div class="col-md-4">
+            <div class="card">
+                <img class="card-img-top" src="{{Project.Image.url}}" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text"><strong>{{project.title}}</strong>: {{project.description |truncatechars_html:170}}</p>
+                    <p class="card-text"><strong>By</strong>: {{project.user}}</p>
+                    <a href="http://{{project.live_link}}" class="btn btn-primary">Live site</a>
+                    <a href="/project/{{project.id}}" class="btn btn-primary">Review</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://rawgit.com/kottenator/jquery-circle-progress/1.2.2/dist/circle-progress.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://www.jqueryscript.net/demo/Animated-Circular-Progress-Bar-with-jQuery-Canvas-Circle-Progress/dist/circle-progress.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.first.circle').circleProgress({
+            value: 0.35,
+            animation: false,
+            fill: {
+                gradient: ['#ff1e41', '#ff5f43']
+            }
+        });
+        $('.second.circle').circleProgress({
+            value: 0.6
+        }).on('circle-animation-progress', function(event, progress) {
+            $(this).find('strong').html(parseInt(100 * progress) + '<i>%</i>');
+        });
+        $('.third.circle').circleProgress({
+            value: 0.8,
+            fill: {
+                gradient: ['#0681c4', '#07c6c1']
+            }
+        }).on('circle-animation-progress', function(event, progress, stepValue) {
+            $(this).find('strong').text(String(stepValue.toFixed(2)).substr(1));
+        });
+        $('.forth.circle').circleProgress({
+            startAngle: -Math.PI / 4 * 3,
+            value: .5,
+            fill: {
+                color: '#ffa500'
+            }
+        });
+        $('.fifth.circle').circleProgress({
+            value: 1,
+            size: 60,
+            thickness: 20,
+            fill: {
+                color: 'lime'
+            }
+        });
+    });
+</script>
+
+{% endblock %}
