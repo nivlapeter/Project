@@ -27,8 +27,8 @@ class Project(models.Model):
     content=models.IntegerField(blank=True,default='')
     overall=models.IntegerField(blank=True,default='')
     categories=models.ManyToManyField(Categories)
-    user=models.OneToOneField(User,on_delete=models.CASCADE)
-    pub_date=models.DateTimeField(default=timezone.now)
+    #user=models.OneToOneField(User,on_delete=models.CASCADE)
+    #pub_date=models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.title
@@ -59,8 +59,7 @@ class Ratings(models.Model):
     project=models.ForeignKey(Project, on_delete=models.CASCADE)
     profile=models.ForeignKey(Profile, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.title
+   
 
 
 
