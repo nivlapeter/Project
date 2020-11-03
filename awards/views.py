@@ -53,11 +53,6 @@ def SignIn(request):
             form = SignupForm()
     return render(request, 'registration/login.html', {'form':form})
 
-# def profile(request, username):
-#     user = User.objects.get(username = username)
-#     profile = Profile.objects.get(user = user)
-#     projects = Project.objects.filter(user = user)
-#     return render(request, 'profile.html', {'profile': profile, 'projects': projects})
 
 @login_required(login_url='/accounts/login/')
 def profile(request, pk_test):
@@ -67,19 +62,6 @@ def profile(request, pk_test):
     my_profile = Profile.objects.get(user=current_user)
     return render(request, 'profile.html', locals())
 
-# @login_required(login_url = '/accounts/login/')
-# def edit_profile(request, id):
-#     if request.method == 'POST':
-#         profile = Profile.objects.get(id = id)
-#         form = ProfileForm(request.POST or None, request.FILES or None, instance = profile)
-#         if form.is_valid():
-#             edit = form.save(commit=False)
-#             edit.save()
-#             return redirect('profile', username = request.user)
-#     else:
-#         form = ProfileForm()
-
-#     return render(request, 'edit_profile.html', {'form': form, "profile":profile})
 
 @login_required(login_url='/accounts/login/')
 def edit_profile(request):
@@ -121,19 +103,6 @@ def project(request, project_id):
         form = RatingsForm()
         return render(request,'project.html',{"project":project,"ratings":ratings,"form":form,"design":design,"usability":usability,"creativity":creativity,"content":content,"score":score} )
 
-# @login_required(login_url='/accounts/login/')
-# def project_upload(request):
-#     if request.method == 'POST':
-#         form = UploadForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             project = form.save(commit=False)
-#             project.user = request.user
-#             project.save()
-#         return redirect('index')
-#     else:
-#         form = UploadForm()
-
-#     return render(request, 'upload_project.html', {'form': form, "profile":profile})
 
 @login_required(login_url='/accounts/login/')
 def project_upload(request):

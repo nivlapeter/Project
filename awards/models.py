@@ -27,14 +27,14 @@ class Project(models.Model):
     content=models.IntegerField(blank=True,default='')
     overall=models.IntegerField(blank=True,default='')
     categories=models.ManyToManyField(Categories)
-    #user=models.OneToOneField(User,on_delete=models.CASCADE)
-    #pub_date=models.DateTimeField(default=timezone.now)
+    pub_date=models.DateTimeField(default=timezone.now)
+    user=models.OneToOneField(User,on_delete=models.CASCADE, default="")
 
     def __str__(self):
         return self.title
 
 class Profile(models.Model):
-    user=models.OneToOneField(User,on_delete=models.CASCADE)
+    user=models.OneToOneField(User,on_delete=models.CASCADE, default="")
     uname=models.CharField(max_length=100)
     profilepic=CloudinaryField('image',default="")
     bio=models.TextField(max_length=255)
